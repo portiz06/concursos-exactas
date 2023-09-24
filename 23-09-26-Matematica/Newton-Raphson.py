@@ -23,10 +23,12 @@ def newton_raphson(f,df,x_0,tol=1e-5,N=100):
     while iteraciones < N:
         # Generamos el paso x_(n+1) = x_(n) - f(x_n)/df(x_n)
         x_prox = x - f(x)/df(x)
+        # Si ya pase mi umbral de tolerancia, retorno la solucion encontrada
         if abs(x-x_prox)< tol:
             return x_prox,iteraciones
         x = x_prox
         iteraciones += 1
+    # Si luego de las N iteraciones, no logre superar la tolerancia deseada, retorno que no se logro la convergencia
     print("No se alcanzó la convergencia después de", N, "iteraciones.")
     return None, iteraciones
 
