@@ -1,3 +1,5 @@
+# Importamos la libreria necesaria para realizar las operaciones matematicas entre matrices o vectores 
+
 import numpy as np
 
 """
