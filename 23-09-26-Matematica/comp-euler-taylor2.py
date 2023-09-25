@@ -19,7 +19,7 @@ Retorna un vector con la aproximacion numerica de la solucion  de la EDO con tie
 """
 def metodo_euler(f, t_0, t_f, x_0, h):
     # Generamos un arreglo de tiempo desde t_0 hasta t_f con pasos de tamaño h.
-    t = np.arange(t_0, t_f, h)
+    t = np.arange(t_0, t_f + 0.0001, h) # Agrego un + epsilon, para que se incluya el t_f en el intervalo
     n = len(t)
     x = np.zeros(n)  # Vector para almacenar las soluciones
     x[0] = x_0  # La condición inicial.
@@ -40,7 +40,7 @@ Retorna un vector con la aproximacion numerica de la solucion  de la EDO con tie
 """
 def taylor2(f, df_x, df_t, t_0, t_f, x_0, h):
     # Generamos un arreglo de tiempo desde t_0 hasta t_f con pasos de tamaño h.
-    t = np.arange(t_0, t_f, h)
+    t = np.arange(t_0, t_f + 0.0001, h) # Agrego un + epsilon, para que se incluya el t_f en el intervalo
     n = len(t)
     x = np.zeros(n) # Vector para almacenar las soluciones
     x[0] = x_0 # Condicion inicial
@@ -48,7 +48,7 @@ def taylor2(f, df_x, df_t, t_0, t_f, x_0, h):
     
     # Implementación del método de Taylor de segundo orden.
     for i in range(0, n - 1):
-        x[i + 1] = x[i] + h * f(t[i], x[i]) + (h**2) / 2 * (f(t[i], x[i]) * df_x(t[i], x[i]) + df_t(t[i], x[i]))
+        x[i + 1] = x[i] + h * f(t[i], x[i]) +  (f(t[i], x[i]) * df_x(t[i], x[i]) + df_t([i], x[i]))*(h**2/2)
     
     return x
 
@@ -62,13 +62,13 @@ def taylor2(f, df_x, df_t, t_0, t_f, x_0, h):
 def f(t, x):
     return x
 
-# Derivada de f(t,x) con respecto a x , que es simplemente 1.
+# Derivada de f(t,x) con respecto a x , que es simplemente 0.
 def df_x(t, x):
-    return 1
-
-# Derivada de f(t,x) con respecto a t , que en este caso es 0 ya que no depende de t.
-def df_t(t, x):
     return 0
+
+# Derivada de f(t,x) con respecto a t , que en este caso es x.
+def df_t(t, x):
+    return x
 
 # Valor de la solución exacta en t_f = 1.
 sol_en_tf = np.exp(1)
@@ -111,7 +111,6 @@ Además, tambien se espera que el método de Taylor de segundo orden sea más pr
 ya que el método de Taylor de segundo orden tiene un error de truncamiento de orden superior.
 
 """
-
 # Graficar los resultados.
 plt.figure()
 plt.plot(log_valores_h, log_errores_euler, label='Euler')
