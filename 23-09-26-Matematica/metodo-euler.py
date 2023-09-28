@@ -19,7 +19,7 @@ solucion aproximada
 
 def metodo_euler(f,t_0,t_f,x_0,h=0.1):
     # Genera una vector que tiene comienzo en t_0, fin en t_f, con pasos de h unidades
-    t = np.arange(t_0,t_f,h)
+    t = np.arange(t_0,t_f+0.001,h)
     n = len(t)
     # Generamos un vector para guardar las soluciones en todo los tiempos de t
     x = np.zeros(n)

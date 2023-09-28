@@ -71,6 +71,7 @@ def Jacobi(A, b, tol=1e-10, m=100, x0=[]):
         i += 1
         if i == m:
             # Si se alcanzo el numero maximo de iteraciones devolvemos el ultimo vector solucion encontrado, y el numero de iteraciones
+            print("No se alcanzo la convergencia luego de",i,"iteraciones")
             return x, i 
 
     return x, i 
